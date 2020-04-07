@@ -1,5 +1,5 @@
 <template>
-  <RouterLink :to="type == 'archive' ? `/archive/event/${event.id}` : `/event/${event.id}` " :class="{ playing: event.dateUnix_start <= time && event.dateUnix_end > time, ended: event.dateUnix_start < time && event.dateUnix_end < time }" class="data_item">
+  <RouterLink :to="type == 'archive' ? `/event/${event.id}` : 'random' ? `/event/${event.id}` : `/event/${event.id}` " :class="{ playing: event.dateUnix_start <= time && event.dateUnix_end > time, ended: event.dateUnix_start < time && event.dateUnix_end < time }" class="data_item" :type="type">
     <p class="bold">{{ event.name | truncate(400, '..') }}</p>
     {{type}}
 

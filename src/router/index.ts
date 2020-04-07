@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Timetable from '../pages/Timetable.vue'
-import About from '../pages/About.vue'
+import Random from '../pages/Random.vue'
 import Add from '../pages/Add.vue'
 import Archive from '../pages/Archive.vue'
 import Popup from '../components/Popup.vue'
-import { sitemapMiddleware } from '../sitemapMiddleware'
 
 Vue.use(VueRouter)
 
@@ -19,14 +18,22 @@ const routes = [
       {
         path: '/event/:id',
         component: Popup,
+        props: { type: 'timetable'}
       },
     ]
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About,
-    props: true
+    path: '/random',
+    name: 'Random',
+    component: Random,
+    props: true,
+    children: [
+      {
+        path: '/event/:id',
+        component: Popup,
+        props: { type: 'random'}
+      },
+    ]
   },
   {
     path: '/add',
@@ -41,8 +48,9 @@ const routes = [
     props: true,
     children: [
       {
-        path: '/archive/event/:id',
+        path: '/event/:id',
         component: Popup,
+        props: { type: 'archive'}
       },
     ]
   }
