@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/dtt-aex/dist/'
+  publicPath: '/new-aex'
 }

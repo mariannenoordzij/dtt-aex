@@ -6,13 +6,13 @@
       <p>new AEX Index</p>
     </li> -->
     <li>
-      <router-link to="/">timetable</router-link>
+    <router-link to="/">timetable</router-link>
     </li>
     <li>
     <router-link to="/archive">archive</router-link>
     </li>
-    <li>
-    <router-link to="/about">?</router-link>
+    <li @click="reload()">
+    <router-link to="/random">random</router-link>
     </li>
     <li>
       <router-link to="/add">+ add event</router-link>
@@ -26,9 +26,19 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Menu',
+  data() {
+    return {
+      click: false
+    }
+  },
   props: {
     // msg: String,
   },
+  methods: {
+    reload: function() {
+      this.$emit("randomReload");
+    }
+  }
 });
 </script>
 

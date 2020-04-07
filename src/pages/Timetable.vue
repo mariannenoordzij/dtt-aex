@@ -3,15 +3,14 @@
     <div class="scheduleWrap" v-for="(item, key) in events" :item="item" :key="key">
       <div class="schedule" v-if="item.key >= todayDateKey">
         <div class="date">{{todayDate === item.date ? 'Today' : tomorrowDate === item.date ? 'Tomorrow' : item.date  }}</div>
-        <DataItem v-for="event in item.posts" :key="event.id" :event="event" @data-click="showDetails(event)" :time="time"></DataItem>
+        <DataItem v-for="event in item.posts" :key="event.id" :event="event" :events="events" :time="time"></DataItem>
       </div>
     </div>
-    <router-view :event="currentItem" :type="type"></router-view>
+    <router-view :event="currentItem" :events="events"></router-view>
   </div>
 </template>
 
 <script lang="ts">
-// @ is an alias to /src
 import Vue from 'vue'
 import DataItem from '@/components/DataItem.vue'
 import moment from 'moment'
@@ -20,7 +19,6 @@ export default Vue.extend({
   name: 'Timetable',
   data() {
     return {
-      type: 'timetable',
       currentItem: {},
       todayDateKey: moment().format('YYYYMMDD'),
       todayDate: moment().format('DD-MM-YYYY'),
@@ -28,7 +26,7 @@ export default Vue.extend({
     }
   },
   components: {
-    DataItem,
+    DataItem
   },
   props: ['events', 'time'],
   mounted() {
@@ -50,16 +48,13 @@ export default Vue.extend({
         }
       }
     },
-  }
+  },
 });
 </script>
 
 <style scoped>
 #timetable {
   width: 100%;
-  /* background-image: url("/aex-02.png");;
-  background-attachment: fixed;
-  background-position: center; /* Center the image */
 }
 
 .date {

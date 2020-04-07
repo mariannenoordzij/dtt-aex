@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <Menu></Menu>
-    <router-view :events="events" :about="about" :time="time"/>
+    <Menu @randomReload="newRandomClick()"></Menu>
+    <router-view :events="events" :about="about" :time="time" :newRandom="newRandom"/>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -10,17 +11,19 @@ import Vue from 'vue'
 import Menu from '@/components/Menu.vue'
 import axios from 'axios'
 import moment from 'moment'
+import Footer from '@/components/Footer.vue'
 
 export default Vue.extend({
   name: 'App',
   components: {
-    Menu
+    Menu, Footer
   },
   data() {
     return {
       about: '',
       events: [],
-      time: moment().format('YYYYMMDDHHmm')
+      time: moment().format('YYYYMMDDHHmm'),
+      newRandom: 0
     }
   },
   mounted() {
@@ -34,11 +37,14 @@ export default Vue.extend({
     .catch(error => {
       console.log(error)
     })
-
     setInterval(() => {
       this.time = moment().format('YYYYMMDDHHmm')
     }, 1000);
-    
+  },
+  methods: {
+    newRandomClick: function() {
+      this.newRandom += 1;
+    }
   }
 });
 </script>
@@ -51,9 +57,8 @@ export default Vue.extend({
 }
 
 #app {
-  /* font-family: 'Amiri', serif; */
-  width:100%;
-  height:100%;
+  width:100vw;
+  height:100vh;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 18px;
   -webkit-font-smoothing: antialiased;
@@ -66,15 +71,10 @@ export default Vue.extend({
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   background-color: #eeeeee;
-  /* color: #2c3e50; */
 }
-/* #nav a.router-link-exact-active {
-  color: #42b983;
-} */
 
 a:link,
 a:visited {
   color: black;
-  /* font-family: serif; */
 }
 </style>
