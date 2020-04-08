@@ -1,12 +1,13 @@
 <template>
+  <!-- Data-Item functions as a whole is a router-link to the Popup page of the current Event (DataItem). The class .playing binds when the current event is happening at the time of accessing the page. -->
   <RouterLink :to="type == 'archive' ? `/event/${event.id}` : 'random' ? `/event/${event.id}` : `/event/${event.id}` " :class="{ playing: event.dateUnix_start <= time && event.dateUnix_end > time, ended: event.dateUnix_start < time && event.dateUnix_end < time }" class="data_item" :type="type">
-    <p class="bold">{{ event.name | truncate(400, '..') }}</p>
-    {{type}}
-
-    <p class="mono">{{ event.time_start }} CET</p>
-    <p v-if="event.initiator">by {{ event.initiator | truncate(400, '..')}}</p>
+    <!-- Event data -->
+    <h1 class="bold">{{ event.name }}</h1>
+    <p>{{type}}</p>
+    <h2 class="mono">{{ event.time_start }} CET</h2>
+    <h2 v-if="event.initiator">by {{ event.initiator }}</h2>
     <div id="container" v-if="event.image">
-      <img :src="event.image.url"/>
+      <img :src="event.image.url" alt="">
     </div>
   </RouterLink>
 </template>
@@ -15,34 +16,25 @@
 import Vue from 'vue'
 import moment from 'moment'
 
-
-
 export default Vue.extend({
   name: 'DataItem',
-  props: [ 'event', 'time', 'type' ],
-  filters: {
-    truncate: function (text : string, stop : number, clamp : string ) {
-    return text.slice(0, stop) + (stop < text.length ? clamp || '...' : '');
-    }
-  }
+  props: [ 'event', 'time', 'type' ]
 });
 </script>
 
-<style scoped>
-p {
-  flex: none;
-}
+<style scoped lang="css">
 
-.mono {
-  font-family: 'Kosugi', sans-serif;
-}
+/* ==========================================================================
+   Data Item component (event-thumbnail) styling
+   ========================================================================== */
+
 
 #container {
   position:relative;
-  flex-grow: 1;
+  bottom:0;
   width:100%;
   height:20%;
-  bottom:0;
+  flex-grow: 1; 
 }
 
 #container img {
@@ -56,52 +48,36 @@ p {
   box-sizing: border-box;
   display: flex; 
   flex-direction: column;
-  /* position:relative; */
-  /* display:flex; */
-  /* flex-grow: 1; */
   width:25%;
   height:24.9vw;
-  border: 2px solid #eeeeee;
   padding:5px;
-  background-color:white;
+  border: 2px solid #eee;
+  background-color: #fff;
   border-radius:12px;
   cursor: pointer;
   text-decoration: none;
 }
 
-.playing{
-  border: 1px solid red; 
-  background-color:#eeeeee;
+.playing {
+  border: 1px solid #f00; 
+  background-color: #eee;
 }
 
 .playing p { 
-  color: red;
+  color: #f00;
 }
 
-
-.ended{
-  color:black;
-  background-color:white;
-  /* border: 1px solid#A0A0A0; */
-
+.ended {
+  color: #000;
+  background-color: #fff;
 }
 
 @media only screen and (max-width: 800px) {
   .data_item {
-      width:50%;
-      height:49.9vw;
-      font-size:16px;
-      hyphens: auto;
-      letter-spacing: -0.2px;
-  }
-
-  p {
-    line-height:1.1;
-    word-spacing: -1px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width:50%;
+    height:49.9vw;
+    hyphens: auto;
+    letter-spacing: -0.2px;
   }
 }
-
 </style>

@@ -1,17 +1,25 @@
 <template>
   <div id="app">
+    <!-- Menu -->
     <Menu @randomReload="newRandomClick()"></Menu>
-    <router-view :events="events" :about="about" :time="time" :newRandom="newRandom"/>
+    <!-- Router Pages -->
+    <router-view :events="events" :time="time" :newRandom="newRandom"/>
+    <!-- Footer -->
     <Footer></Footer>
   </div>
 </template>
 
-<script lang="javascript">
+<script lang="ts">
 import Vue from 'vue'
 import Menu from '@/components/Menu.vue'
 import axios from 'axios'
 import moment from 'moment'
 import Footer from '@/components/Footer.vue'
+
+// In "data" I store the [array] with date {objects} which have an [array] of events sorted by starting time. 
+// In "time" I make a moment.js object Moment to save the current time and compare it to the event entries later.
+// "newRandom" is a counter with which an event is emmitted in Random.vue to pick a new event.
+// In the mounted cycle axios fetches the data from the API.
 
 export default Vue.extend({
   name: 'App',
@@ -20,7 +28,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      about: '',
       events: [],
       time: moment().format('YYYYMMDDHHmm'),
       newRandom: 0
@@ -31,7 +38,6 @@ export default Vue.extend({
     axios
     .get('https://dev.oort.network/new-aex/wp-json/api/main')
     .then(response => {
-      self.about = response.data.about;
       self.events = response.data.events;
     })
     .catch(error => {
@@ -49,20 +55,20 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style lang="css">
+
+/* ==========================================================================
+   Global style
+   ========================================================================== */
+
+
 * {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 #app {
-  width:100vw;
-  height:100vh;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 18px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -70,11 +76,52 @@ export default Vue.extend({
   right: 0;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
-  background-color: #eeeeee;
+  width: 100vw;
+  height: 100vh;
+  background-color: #eee;
+}
+
+p,
+span,
+li,
+h1, 
+h2,
+h3,
+.go-back a:link {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#footer p,
+.mono {
+  font-family: 'Kosugi', sans-serif;
 }
 
 a:link,
 a:visited {
-  color: black;
+  color: #000;
+}
+
+@media only screen and (max-width: 800px) {
+  .data_item {
+    font-size:16px;
+  }
+
+  .data_item p,
+  .data_item span,
+  .data_item li,
+  .data_item h1, 
+  .data_item h2,
+  .data_item h3
+  {
+    overflow: hidden;
+    line-height:1.1;
+    word-spacing: -1px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="timetable">
-    <div class="scheduleWrap" v-for="(item, key) in events.slice().reverse()" :item="item" :key="key">
+    <div class="schedule-wrap" v-for="(item, key) in events.slice().reverse()" :item="item" :key="key">
       <div class="schedule" v-if="item.key < todayDateKey">
         <div class="date">{{todayDate === item.date ? 'Today' : tomorrowDate === item.date ? 'Tomorrow' : item.date  }}</div>
         <DataItem v-for="event in item.posts" :key="event.id" :event="event"></DataItem>
@@ -10,10 +10,9 @@
 </template>
 
 <script lang="ts">
-// @ is an alias to /src
 import Vue from 'vue'
-import DataItem from '@/components/DataItem.vue'
 import moment from 'moment'
+import DataItem from '@/components/DataItem.vue'
 
 export default Vue.extend({
   name: 'Archive',
@@ -26,29 +25,33 @@ export default Vue.extend({
     }
   },
   components: {
-    DataItem,
+    DataItem
   },
   props: ['events', 'time']
 });
 </script>
 
-<style scoped>
+<style scoped lang="css">
+
+/* ==========================================================================
+   Archive page styling
+   ========================================================================== */
+
+
 #timetable {
   width: 100%;
 }
 
 .date {
-  font-family: 'Kosugi', sans-serif;
-  position:relative;
-  line-height: 30px;
-  height:35px;
-  width:100%;
+  width: 100%;
+  height: 35px;
   padding:5px;
+  font-family: 'Kosugi', sans-serif;
+  line-height: 30px;
 }
 
-.scheduleWrap{
+.schedule-wrap {
   width: 100%;
-  position: relative;
 }
 
 .schedule {

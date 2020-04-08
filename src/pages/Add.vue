@@ -1,19 +1,26 @@
 <template>
   <div id="add">
-      <iframe src="https://dev.oort.network/new-aex/"></iframe>
+    <!-- Iframe to the backend submission form (not relevant for this test, but essential part of new AEX) -->
+    <iframe src="https://dev.oort.network/new-aex/"></iframe>
   </div>
 </template>
 
 <script lang="ts">
-// @ is an alias to /src
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'Add',
+  name: 'Add'
 });
 </script>
 
-<style scoped>
+<style scoped lang="css">
+
+
+/* ==========================================================================
+   Add page styling
+   ========================================================================== */
+
+
 #add {
   position: fixed; 
   right: 0; 
@@ -24,12 +31,10 @@ export default Vue.extend({
   overflow-y: scroll;
 }
 
-#add >>> iframe {
-    
-    width: 100%;
-    height: 100%;
-    outline: none;
-    border:0;
+#add iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: none;
 }
-
 </style>

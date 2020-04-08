@@ -8,6 +8,8 @@ import Popup from '../components/Popup.vue'
 
 Vue.use(VueRouter)
 
+// Router routes configuration
+
 const routes = [
   {
     path: '/',
@@ -54,7 +56,6 @@ const routes = [
       },
     ]
   }
-
 ]
 
 const router = new VueRouter({

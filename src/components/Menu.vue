@@ -1,18 +1,16 @@
 <template>
 <div id="menu">
   <ul>
-    <!-- <img src="aex-01.gif"/> -->
-    <!-- <li>
-      <p>new AEX Index</p>
-    </li> -->
+    <!-- Router links -->
     <li>
-    <router-link to="/">timetable</router-link>
+      <router-link to="/">timetable</router-link>
     </li>
     <li>
-    <router-link to="/archive">archive</router-link>
+      <router-link to="/archive">archive</router-link>
     </li>
+    <!-- Event which triggers the selection of a new random event on the Random-page -->
     <li @click="reload()">
-    <router-link to="/random">random</router-link>
+      <router-link to="/random">random</router-link>
     </li>
     <li>
       <router-link to="/add">+ add event</router-link>
@@ -26,14 +24,6 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Menu',
-  data() {
-    return {
-      click: false
-    }
-  },
-  props: {
-    // msg: String,
-  },
   methods: {
     reload: function() {
       this.$emit("randomReload");
@@ -42,42 +32,43 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped>
+<style scoped lang="css">
+
+/* ==========================================================================
+   Menu component styling
+   ========================================================================== */
+
+
 img {
-  /* position:absolute; */
-  left:0;
-  height:50px;
+  left: 0;
+  height: 50px;
 }
 
 #menu {
   position: sticky;
   top: 0;
-  /* background-color: white; */
   z-index:100;
 }
 
 ul {
-  box-sizing:border-box;
-  width:100%;
+  box-sizing: border-box;
+  width: 100%;
   padding: 5px;
 }
 
 ul li {
-  /* width:30%; */
-  display:inline-block;
-  background-color: red;
+  display: inline-block;
+  padding: 12px;
+  margin: 3px;
+  border-radius: 25px;
   text-align: center;
-  border-radius:25px;
-  padding:12px;
-  margin:3px;
-  
+  background-color: #f00;
 }
 
 @media only screen and (max-width: 340px) {
   ul li {
-
-      font-size:16px;
-      padding:9.5px;
+    padding: 9.5px;
+    font-size: 16px;
   }
 }
 </style>
