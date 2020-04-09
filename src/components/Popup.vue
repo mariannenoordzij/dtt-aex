@@ -47,11 +47,17 @@ export default Vue.extend({
   data() {
     return {
       relatedEvents: new Array<Object>(),
+      ready: false
+    }
+  },
+  beforeUpdate() {
+    if (this.events.length) {
+      this.checkForSameInitiator();
     }
   },
   mounted() {
     if (this.events.length) {
-    this.checkForSameInitiator();
+      this.checkForSameInitiator();
     }
   },
   methods: {
