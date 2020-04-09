@@ -1,7 +1,7 @@
 <template>
   <div id="add">
     <!-- Iframe to the backend submission form (not relevant for this test, but essential part of new AEX) -->
-    <iframe src="https://dev.oort.network/new-aex/"></iframe>
+    <iframe src="https://newaex.com/admin/"></iframe>
   </div>
 </template>
 
@@ -22,18 +22,16 @@ export default Vue.extend({
 
 
 #add {
-  position: fixed; 
+  position: absolute; 
   right: 0; 
   bottom: 0; 
   left: 0;
   top: 0;
-  -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
 }
 
 #add iframe {
   width: 100%;
-  height: 100%;
+  height: 180%;
   border: 0;
   outline: none;
 }

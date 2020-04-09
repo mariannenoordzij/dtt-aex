@@ -11,10 +11,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Menu from '@/components/Menu.vue'
 import axios from 'axios'
 import moment from 'moment'
 import Footer from '@/components/Footer.vue'
+import Menu from '@/components/Menu.vue'
 
 // In "data" I store the [array] with date {objects} which have an [array] of events sorted by starting time. 
 // In "time" I make a moment.js object Moment to save the current time and compare it to the event entries later.
@@ -36,7 +36,7 @@ export default Vue.extend({
   mounted() {
     var self = this;
     axios
-    .get('https://dev.oort.network/new-aex/wp-json/api/main')
+    .get('https://newaex.com/admin/wp-json/api/main')
     .then(response => {
       self.events = response.data.events;
     })
@@ -74,7 +74,7 @@ export default Vue.extend({
   bottom: 0;
   left: 0;
   right: 0;
-  overflow: scroll;
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   width: 100vw;
   height: 100vh;
